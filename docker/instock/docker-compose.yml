@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  InStock:
+    container_name: InStock
+    build:
+      context: ../..
+      dockerfile: docker/instock/Dockerfile
+    image: instock
+    restart: always
+    ports:
+      - "9988:9988"   # 按需更改
+    environment:
+#      db_host: 172.17.0.1
+      db_host: 192.168.31.7
+      db_user: root
+      db_password: 1234qwer
+      db_database: instockdb
+      db_port: 3306
+    networks:
+      - mynetwork
+ 
+networks:
+  mynetwork:
+    driver: host
